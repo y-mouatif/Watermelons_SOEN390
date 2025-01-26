@@ -1,0 +1,78 @@
+name: CI Workflow for Concordia Campus Guide
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest] # Runs on both Windows and macOS
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Install front-end dependencies
+      - name: Install front-end dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      # Run front-end tests
+      - name: Run front-end tests
+        run: npm test
+        working-directory: ./frontend
+
+      # Install back-end dependencies
+      - name: Install back-end dependencies
+        run: npm install
+        working-directory: ./backend
+
+      # Run back-end tests
+      - name: Run back-end tests
+        run: npm test
+        working-directory: ./backend
+
+  android-ios-tests:
+    name: Android & iOS Tests
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      # Run Jest tests for Android and iOS
+      - name: Run Jest tests
+        run: npm run test:android && npm run test:ios
+        working-directory: ./frontend
