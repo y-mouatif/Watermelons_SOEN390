@@ -3,6 +3,7 @@
     "name": "myApp",
     "slug": "myApp",
     "version": "1.0.0",
+    "sdkVersion": "48.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
