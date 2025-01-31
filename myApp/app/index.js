@@ -17,6 +17,9 @@ export default function Index() {
       <Link href='/SGWCampus' style={{ color: "blue", textDecorationLine: "underline" }}>
         Go to SGW Campus Map
       </Link>
+      <Link href='/LoyolaCampus' style={{ color: "blue", textDecorationLine: "underline" }}>
+        Go to Loyola Campus Map
+      </Link>
     </View>
   );
 }
