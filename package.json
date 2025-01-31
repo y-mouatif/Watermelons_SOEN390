@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "expo-blur": "~14.0.3"
+    "expo-blur": "~14.0.3",
+    "expo-maps": "^0.7.0",
+    "expo-router": "^4.0.17",
+    "react-native-maps": "^1.20.1",
+    "react-native-maps-directions": "^1.9.0"
   }
 }

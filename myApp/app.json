@@ -3,6 +3,7 @@
     "name": "myApp",
     "slug": "myApp",
     "version": "1.0.0",
+    "sdkVersion": "52.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -20,7 +21,17 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "head": [
+        {
+          "tag": "script",
+          "attrs": {
+            "src": "https://maps.googleapis.com/maps/api/js?key=AIzaSyBdODoY5Fr_jtGEJ2P-y3ZqxbZA9QMUoT0&libraries=places",
+            "async": true,
+            "defer": true
+          }
+        }
+      ]
     },
     "plugins": [
       "expo-router",
