@@ -10,6 +10,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --passWithNoTests",
+    "test:android": "npm run test",
+    "test:ios": "npm run test",
     "lint": "expo lint"
   },
   "jest": {
