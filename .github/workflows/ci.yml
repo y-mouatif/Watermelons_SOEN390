@@ -22,31 +22,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Debug Directory Structure (for troubleshooting)
+      - name: Debug Directory Structure
+        run: ls -R
+
       # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      # Install front-end dependencies
-      - name: Install front-end dependencies
+      # Install dependencies
+      - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
+        working-directory: myApp
 
-      # Run front-end tests
-      - name: Run front-end tests
+      # Run tests
+      - name: Run tests
         run: npm test
-        working-directory: ./frontend
-
-      # Install back-end dependencies
-      - name: Install back-end dependencies
-        run: npm install
-        working-directory: ./backend
-
-      # Run back-end tests
-      - name: Run back-end tests
-        run: npm test
-        working-directory: ./backend
+        working-directory: myApp
 
   android-ios-tests:
     name: Android & iOS Tests
@@ -61,6 +55,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Debug Directory Structure (for troubleshooting)
+      - name: Debug Directory Structure
+        run: ls -R
+
       # Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -70,14 +68,14 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
+        working-directory: myApp
 
       # Run Jest tests for Android
       - name: Run Jest tests for Android
         run: npm run test:android
-        working-directory: ./frontend
+        working-directory: myApp
 
       # Run Jest tests for iOS
       - name: Run Jest tests for iOS
         run: npm run test:ios
-        working-directory: ./frontend
+        working-directory: myApp
