@@ -72,7 +72,12 @@ jobs:
         run: npm install
         working-directory: ./frontend
 
-      # Run Jest tests for Android and iOS
-      - name: Run Jest tests
-        run: npm run test:android && npm run test:ios
+      # Run Jest tests for Android
+      - name: Run Jest tests for Android
+        run: npm run test:android
+        working-directory: ./frontend
+
+      # Run Jest tests for iOS
+      - name: Run Jest tests for iOS
+        run: npm run test:ios
         working-directory: ./frontend
