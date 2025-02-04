@@ -20,6 +20,7 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
     "@react-google-maps/api": "^2.20.5",
+    "@react-native-community/geolocation": "^3.4.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@teovilla/react-native-web-maps": "^0.9.5",
