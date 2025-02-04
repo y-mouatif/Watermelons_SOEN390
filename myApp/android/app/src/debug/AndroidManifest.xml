@@ -1,25 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Required Permissions -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    
 
-    <application
-        android:usesCleartextTraffic="true"
-        tools:targetApi="28"
-        tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:usesCleartextTraffic">
-
-        <!-- Google Maps API Key (replace with your actual key) -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="YAIzaSyBdODoY5Fr_jtGEJ2P-y3ZqxbZA9QMUoT0
-" />
-
-        <!-- Other application components (activities, services, etc.) go here -->
-
-    </application>
+    <application android:usesCleartextTraffic="true" tools:targetApi="28" tools:ignore="GoogleAppIndexingWarning" tools:replace="android:usesCleartextTraffic" />
 
 </manifest>
