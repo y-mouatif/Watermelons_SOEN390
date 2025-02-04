@@ -1,12 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import LoyolaOutdoorMap from "./components/LoyolaOutdoorMap";
 
 export default function LoyolaCampus() {
+    
+    const navigation = useNavigation();
+    
+        const handlePress = () => {
+            navigation.navigate("SGWCampus");
+        };
+    
+    
+    
+    
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Welcome to Loyola Campus</Text>
             <LoyolaOutdoorMap />
+            <Button title="SGW Campus" onPress={handlePress} />
         </View>
     );
 }
