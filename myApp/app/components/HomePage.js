@@ -30,14 +30,14 @@ export default function HomePage() {
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Points of Interest</Text>
+                        <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Browse</Text>
+                        <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.buttonOrange}>
                         <Text style={styles.buttonText}>Directions to my next class</Text>
                     </TouchableOpacity>
                 </View>
