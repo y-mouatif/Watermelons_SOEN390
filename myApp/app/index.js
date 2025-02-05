@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 import React from "react";
-import { Link } from "expo-router";
+import HomePage from "./components/HomePage";
 
 export default function Index() {
   return (
@@ -11,15 +11,7 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Home Page</Text>
-
-      {/* Link to SGW Campus Map */}
-      <Link href='/SGWCampus' style={{ color: "blue", textDecorationLine: "underline" }}>
-        Go to SGW Campus Map
-      </Link>
-      <Link href='/LoyolaCampus' style={{ color: "blue", textDecorationLine: "underline" }}>
-        Go to Loyola Campus Map
-      </Link>
+      <HomePage/>
     </View>
   );
 }
