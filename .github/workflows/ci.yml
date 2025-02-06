@@ -9,6 +9,7 @@ on:
       - main
 
 jobs:
+
   build-and-test:
     name: Build and Test
     runs-on: ${{ matrix.os }}
@@ -79,3 +80,24 @@ jobs:
       - name: Run Jest tests for iOS
         run: npm run test:ios
         working-directory: myApp
+        
+  
+  #Codecov      
+  test:
+          runs-on: ubuntu-latest
+          name: Codecov test
+          steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+      
+            - name: Setup Node.js and deps
+              uses: ./.github/actions/setup-deps
+      
+            - name: Test
+              run: yarn test:ci:coverage
+              working-directory: myApp
+      
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v4
+              env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
