@@ -85,13 +85,13 @@ jobs:
   #Codecov      
   test:
           runs-on: ubuntu-latest
-          name: Codecov test
+          name: Codecov report
           steps:
             - name: Checkout
               uses: actions/checkout@v4
       
             - name: Setup Node.js and deps
-              uses: ./.github/actions/setup-deps
+              uses: actions/setup-node@v3
       
             - name: Test
               run: yarn test:ci:coverage
