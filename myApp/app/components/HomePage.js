@@ -2,10 +2,11 @@ import React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { homepageStyles as styles } from '../styles/HomePageStyles.js'
+import InterestPoints from '../screens/InterestPoints';
 export default function HomePage() {
     const router = useRouter()
     return (
-        <View>
+        <View style ={{flex:1}}>
             <Image style={styles.logo}
                 source={require('../../assets/images/logo.png')}
                 resizeMode="contain"
@@ -17,7 +18,7 @@ export default function HomePage() {
                     style={styles.button}
                     onPress={() => router.push('/SGWCampus')}
                     >
-                        <Text style={styles.buttonText}>SGW Campus</Text>
+                    <Text style={styles.buttonText}>SGW Campus</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                     style={styles.button}
@@ -30,7 +31,9 @@ export default function HomePage() {
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                    onPress={() => router.push('../screens/InterestPoints')}
+                    >
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
                 </View>
