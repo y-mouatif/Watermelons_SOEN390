@@ -20,7 +20,7 @@ export default function SGWCampus() {
         <View style={styles.containerForMap}>
             <Text style={styles.titleForMap}>Welcome to SGW Campus</Text>
             <SGWOutdoorMap />
-            <Button title="Loyola Campus" onPress={handlePress} />
+            <Button title="Loyola Campus" onPress={handlePress} color= "#922338"/>
         </View>
     );
 }
