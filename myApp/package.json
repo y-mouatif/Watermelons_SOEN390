@@ -10,6 +10,7 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --passWithNoTests",
+    "test:ci:coverage": "jest --coverage",
     "test:android": "npm run test",
     "test:ios": "npm run test",
     "lint": "expo lint"
