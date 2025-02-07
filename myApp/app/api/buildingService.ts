@@ -1,3 +1,5 @@
+import React from "react";
+
 import { getAllBuildings, getBuildingById } from "./buildingData";
 
 // Get all building information
