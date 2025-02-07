@@ -103,7 +103,7 @@ jobs:
               working-directory: myApp
       
             - name: Run tests with coverage
-              run: npm test:ci:coverage
+              run: npm run test:ci:coverage
               working-directory: myApp
       
             - name: Upload coverage to Codecov
