@@ -94,7 +94,12 @@ jobs:
               uses: actions/setup-node@v3
 
             - name: Install dependencies
-              run: yarn install  
+              run: yarn install 
+              
+             # Check Jest installation (this will ensure Jest is installed and accessible)
+            - name: Check Jest installation
+              run: yarn jest --version
+              working-directory: myApp
       
             - name: Test
               run: yarn test:ci:coverage
