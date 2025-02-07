@@ -92,6 +92,9 @@ jobs:
       
             - name: Setup Node.js and deps
               uses: actions/setup-node@v3
+
+            - name: Install dependencies
+              run: yarn install  
       
             - name: Test
               run: yarn test:ci:coverage
