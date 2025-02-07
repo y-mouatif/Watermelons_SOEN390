@@ -94,15 +94,16 @@ jobs:
               uses: actions/setup-node@v3
 
             - name: Install dependencies
-              run: yarn install 
+              run: npm install 
+              working-directory: myApp
               
              # Check Jest installation (this will ensure Jest is installed and accessible)
             - name: Check Jest installation
-              run: yarn jest --version
+              run: npm run jest --version
               working-directory: myApp
       
-            - name: Test
-              run: yarn test:ci:coverage
+            - name: Run tests with coverage
+              run: npm test:ci:coverage
               working-directory: myApp
       
             - name: Upload coverage to Codecov
