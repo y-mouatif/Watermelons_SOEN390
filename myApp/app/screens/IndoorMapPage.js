@@ -5,10 +5,13 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeTabs from "../navigators/HomeTabs";
 
-export default function InterestPoints() {
+
+export default function IndoorMap() {
   return (
     <>
-      <Text> This is the Interest Points page </Text>
+
+      <Text> This is the Indoor Map page </Text>
+
 
     </>
 

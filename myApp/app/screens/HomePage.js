@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { homepageStyles as styles } from '../styles/HomePageStyles.js'
-import InterestPoints from '../screens/InterestPoints';
+import InterestPoints from '../screens/InterestPointsPage';
 export default function HomePage() {
     const router = useRouter()
     return (
@@ -32,7 +32,7 @@ export default function HomePage() {
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                    onPress={() => router.push('../screens/InterestPoints')}
+                    onPress={() => router.push('../screens/InterestPointsPage')}
                     >
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>

@@ -2,18 +2,15 @@ import { Text, View } from "react-native";
 import React from "react";
 import { Link } from "expo-router";
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
 import HomeTabs from "../navigators/HomeTabs";
+import { useLocalSearchParams } from "expo-router";
 
+export default function InterestPoints() {
 
-export default function IndoorMap() {
-  return (
-    <>
-
-      <Text> This is the Indoor Map page </Text>
-
-    </>
-
-
+return(
+<>
+    <Text> This is the Interest Points page</Text>
+      <HomeTabs/>
+</>
   );
 }

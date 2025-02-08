@@ -1,27 +1,33 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import InterestPoints from '../screens/InterestPoints';
-import Favorites from '../screens/Favorites';
-import IndoorMap from '../screens/IndoorMap';
+import InterestPoints from '../screens/InterestPointsPage';
+import Favorites from '../screens/FavoritesPage';
+import IndoorMap from '../screens/IndoorMapPage';
+import Index from './../index';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Text, StyleSheet, View } from 'react-native'; // <-- Import View
+import { Text, StyleSheet, View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
-
 const HomeTabs = () => {
+
+
     return (
+
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size, focused }) => {
                     let iconName;
 
                     switch (route.name) {
-                        case "Interest Points":
+                        case "Index":
+                             iconName = focused ? "home" : "home-outline";
+                             break;
+                        case "InterestPoints":
                             iconName = focused ? "pin" : "pin-outline";
                             break;
                         case "Favorites":
                             iconName = focused ? "star" : "star-outline";
                             break;
-                        case "Indoor Map":
+                        case "IndoorMap":
                             iconName = focused ? "map" : "map-outline";
                             break;
                     }
@@ -38,10 +44,11 @@ const HomeTabs = () => {
                 tabBarActiveTintColor: "white",
                 tabBarInactiveTintColor: "grey",
             })}
-        >
-            <Tab.Screen name="Interest Points" component={InterestPoints} />
+            >
+            <Tab.Screen name="Index" component={Index} />
+            <Tab.Screen name="InterestPoints" component={InterestPoints} />
             <Tab.Screen name="Favorites" component={Favorites} />
-            <Tab.Screen name="Indoor Map" component={IndoorMap} />
+            <Tab.Screen name="IndoorMap" component={IndoorMap} />
         </Tab.Navigator>
     );
 };
@@ -50,7 +57,7 @@ const styles = StyleSheet.create({
     tabBarStyle: {
         height: 80,
         backgroundColor: "#ffffff",
-        position: 'absolute',
+        position: 'relative',
         left: 20,
         right: 20,
         borderRadius: 40,
@@ -60,12 +67,13 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 5,
-
+        bottom: 20,
     },
 
     tabBarItemStyle: {
         paddingVertical: 10,
         borderRadius: 40,
+
 
     },
 
@@ -84,7 +92,7 @@ const styles = StyleSheet.create({
     activeTabBackground: {
         position: 'absolute',
         backgroundColor: "grey",
-        borderRadius: 20,
+        borderRadius: 40,
         width: 100,
         height: 60,
         top: -5,
