@@ -9,33 +9,46 @@ export default function HomePage() {
             <Image style={styles.logo}
                 source={require('../../assets/images/logo.png')}
                 resizeMode="contain"
+                testID="logo"
             />
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>Getting around campus</Text>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => router.push('/SGWCampus')}
+                    testID="sgwButton"
+                    onPress={() => {
+                        console.log('Button pressed');
+                        router.push('/SGWCampus');
+                        }}
                     >
                         <Text style={styles.buttonText}>SGW Campus</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => router.push('LoyolaCampus')}
+                    testID="loyolaButton"
+                    onPress={() => router.push('/LoyolaCampus')}
                     >
                         <Text style={styles.buttonText}>Loyola Campus</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    testID="browseButton"
+                    >
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    testID="interestButton">
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonOrange}>
+                    <TouchableOpacity 
+                    style={styles.buttonOrange}
+                    testID="directionButton">
                         <Text style={styles.buttonText}>Directions to my next class</Text>
                     </TouchableOpacity>
                 </View>
@@ -43,9 +56,12 @@ export default function HomePage() {
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>Link your account</Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.googleButton}>
+                    <TouchableOpacity 
+                    style={styles.googleButton}
+                    testID="googleButton">
                         <Image
                             source={require('../../assets/images/google_logo.png')}
+                            testID="googleIcon"
                             style={styles.icon}
                         />
                         <Text style={styles.googleButtonText}>Connect Google Calendar</Text>

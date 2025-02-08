@@ -7,11 +7,10 @@ import {
   Text, 
   Modal 
 } from "react-native";
-import MapView, { Marker, Polygon } from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons"; 
 import useLocation from "../hooks/useLocation";
-import styles from "../styles/OutdoorMapStyles";
-import { buildings, Campus } from "../utils/mapUtils";
+import styles from "../styles/OutdoorMapStyles"
 
 const SGWOutdoorMap = () => {
   const { location, errorMsg, hasPermission } = useLocation();
@@ -88,19 +87,6 @@ const SGWOutdoorMap = () => {
             pinColor="blue"
           />
         )}
-
-        {/* Render polygons for SGW buildings */}
-        {buildings
-          .filter((building) => building.campus === Campus.SGW) 
-          .map((building) => (
-            <Polygon
-              key={building.name}
-              coordinates={building.coordinates}
-              fillColor="rgba(255, 0, 0, 0.4)" 
-              strokeColor="red"
-              strokeWidth={2}
-            />
-          ))}
       </MapView>
 
       <View style={styles.buttonContainer}>
