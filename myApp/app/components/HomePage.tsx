@@ -18,7 +18,6 @@ export default function HomePage() {
                     style={styles.button}
                     testID="sgwButton"
                     onPress={() => {
-                        console.log('Button pressed');
                         router.push('/SGWCampus');
                         }}
                     >
