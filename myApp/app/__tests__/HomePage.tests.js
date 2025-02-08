@@ -12,12 +12,6 @@ jest.mock('expo-router', () => ({
     }),
 }));
 
-function FormDataMock() {
-    this.append = jest.fn();
-  }
-  
-global.FormData = FormDataMock;
-
 describe('Home page', () => {
     beforeEach(() => {
         // Clear mock history before each test
