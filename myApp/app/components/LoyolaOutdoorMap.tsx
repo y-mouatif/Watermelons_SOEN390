@@ -89,7 +89,7 @@ const LoyolaOutdoorMap = () => {
           />
         )}
 
-        {/* Render polygons for SGW buildings */}
+        {/* Render polygons for LOY buildings */}
         {buildings
           .filter((building) => building.campus === Campus.LOY) 
           .map((building) => (
