@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     tabBarStyle: {
         height: 80,
         backgroundColor: "#ffffff",
-        position: 'relative',
+
         left: 20,
         right: 20,
         borderRadius: 40,
@@ -67,7 +67,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 5,
-        bottom: 20,
+        top: 710,
+        position: "absolute",
     },
 
     tabBarItemStyle: {
@@ -108,3 +109,4 @@ const styles = StyleSheet.create({
 });
 
 export default HomeTabs;
+export const tabBarStyle = styles.tabBarStyle;

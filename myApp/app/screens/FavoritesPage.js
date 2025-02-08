@@ -8,11 +8,11 @@ import HomeTabs from "../navigators/HomeTabs";
 
 export default function Favorites() {
   return (
-    <>
+    <View>
 
       <Text> This is the Favorites page </Text>
 
-    </>
+    </View>
 
 
   );

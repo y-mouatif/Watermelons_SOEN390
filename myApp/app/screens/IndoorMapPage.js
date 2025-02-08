@@ -8,12 +8,12 @@ import HomeTabs from "../navigators/HomeTabs";
 
 export default function IndoorMap() {
   return (
-    <>
+    <View>
 
       <Text> This is the Indoor Map page </Text>
 
 
-    </>
+    </View>
 
 
   );
