@@ -1,4 +1,5 @@
 // Import the functions we are testing
+import React from "react";
 import { fetchAllBuildings, fetchBuildingById } from "./buildingService";
 
 describe("Building Service API", () => {
