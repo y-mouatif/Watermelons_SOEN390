@@ -1,56 +1,53 @@
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import SGWCampus from '../SGWCampus';
+import LoyolaCampus from '../LoyolaCampus';
 import InterestPoints from '../screens/InterestPointsPage';
 import Favorites from '../screens/FavoritesPage';
 import IndoorMap from '../screens/IndoorMapPage';
-import Index from './../index';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { Text, StyleSheet, View } from 'react-native';
+import HomePage from '../screens/HomePage';
+import { View, StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
+
 const HomeTabs = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size, focused }) => {
+          let iconName;
+          switch (route.name) {
+            case "HomePage":
+              iconName = focused ? "home" : "home-outline";
+              break;
+            case "InterestPoints":
+              iconName = focused ? "map" : "map-outline";
+              break;
+            case "Favorites":
+              iconName = focused ? "star" : "star-outline";
+              break;
+            case "IndoorMap":
+              iconName = focused ? "compass" : "compass-outline";
+              break;
+          }
 
-
-    return (
-
-        <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size, focused }) => {
-                    let iconName;
-
-                    switch (route.name) {
-                        case "Index":
-                             iconName = focused ? "home" : "home-outline";
-                             break;
-                        case "InterestPoints":
-                            iconName = focused ? "pin" : "pin-outline";
-                            break;
-                        case "Favorites":
-                            iconName = focused ? "star" : "star-outline";
-                            break;
-                        case "IndoorMap":
-                            iconName = focused ? "map" : "map-outline";
-                            break;
-                    }
-
-                    return (
-                        <View style={[styles.tabItem, focused && styles.activeTabBackground]}>
-                            <Ionicons name={iconName} size={20} color={color} style={{margin: -10}}/>
-                        </View>
-
-                    );
-                },
-                tabBarStyle: styles.tabBarStyle,
-                tabBarItemStyle: styles.tabBarItemStyle,
-                tabBarActiveTintColor: "white",
-                tabBarInactiveTintColor: "grey",
-            })}
-            >
-            <Tab.Screen name="Index" component={Index} />
-            <Tab.Screen name="InterestPoints" component={InterestPoints} />
-            <Tab.Screen name="Favorites" component={Favorites} />
-            <Tab.Screen name="IndoorMap" component={IndoorMap} />
-        </Tab.Navigator>
-    );
+          return (
+            <View style={[styles.tabItem, focused && styles.activeTabBackground]}>
+              <Ionicons name={iconName} size={20} color={color} />
+            </View>
+          );
+        },
+      })}
+    >
+      <Tab.Screen name="HomePage" component={HomePage} />
+      <Tab.Screen name="SGWCampus" component={SGWCampus} />
+      <Tab.Screen name="LoyolaCampus" component={LoyolaCampus} />
+      <Tab.Screen name="InterestPoints" component={InterestPoints} />
+      <Tab.Screen name="Favorites" component={Favorites} />
+      <Tab.Screen name="IndoorMap" component={IndoorMap} />
+    </Tab.Navigator>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -102,11 +99,7 @@ const styles = StyleSheet.create({
         zIndex: 0,
         bottom: 10,
     },
-
-
-
-
 });
+  
 
 export default HomeTabs;
-export const tabBarStyle = styles.tabBarStyle;
