@@ -8,8 +8,6 @@ import HomeTabs from "../navigators/HomeTabs";
 export default function InterestPoints() {
   return (
     <>
-                <HomeTabs/>
-                <StatusBar style = "auto"/>
       <Text> This is the Interest Points page </Text>
 
     </>
