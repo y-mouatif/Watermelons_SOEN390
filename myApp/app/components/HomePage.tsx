@@ -33,15 +33,22 @@ export default function HomePage() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    testID="browseButton"
+                    >
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity 
+                    style={styles.button}
+                    testID="interestButton">
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.buttonOrange}>
+                    <TouchableOpacity 
+                    style={styles.buttonOrange}
+                    testID="directionButton">
                         <Text style={styles.buttonText}>Directions to my next class</Text>
                     </TouchableOpacity>
                 </View>
@@ -49,9 +56,12 @@ export default function HomePage() {
             <View style={styles.buttonsContainer}>
                 <Text style={styles.title}>Link your account</Text>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.googleButton}>
+                    <TouchableOpacity 
+                    style={styles.googleButton}
+                    testID="googleButton">
                         <Image
                             source={require('../../assets/images/google_logo.png')}
+                            testID="googleIcon"
                             style={styles.icon}
                         />
                         <Text style={styles.googleButtonText}>Connect Google Calendar</Text>

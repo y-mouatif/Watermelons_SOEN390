@@ -18,10 +18,24 @@ describe('Home page', () => {
         mockPush.mockClear();
     });
 
-    it('should load homepage on startup', () => {
+    it('should load homepage and buttons on startup', () => {
         const page = render(<HomePage/>);
         const logo = page.getByTestId('logo');
+        const googleIcon = page.getByTestId('googleIcon');
+        const sgwButton = page.getByTestId('sgwButton');
+        const loyolaButton = page.getByTestId('loyolaButton');
+        const browseButton = page.getByTestId('browseButton');
+        const interestButton = page.getByTestId('interestButton');
+        const directionButton = page.getByTestId('directionButton');
+        const googleButton = page.getByTestId('googleButton');
         expect(logo).toBeTruthy();
+        expect(googleIcon).toBeTruthy();
+        expect(sgwButton).toBeTruthy();
+        expect(loyolaButton).toBeTruthy();
+        expect(browseButton).toBeTruthy();
+        expect(interestButton).toBeTruthy();
+        expect(directionButton).toBeTruthy();
+        expect(googleButton).toBeTruthy();
     })
 
     it('should go to sgw campus when sgw campus button is pressed', () => {
