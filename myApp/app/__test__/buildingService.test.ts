@@ -1,6 +1,5 @@
 // Import the functions we are testing
-import React from "react";
-import { fetchAllBuildings, fetchBuildingById } from "./buildingService";
+import { fetchAllBuildings, fetchBuildingById } from "../api/buildingService";
 
 describe("Building Service API", () => {
   /**
