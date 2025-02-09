@@ -7,10 +7,11 @@ import {
   Text, 
   Modal 
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polygon } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons"; // For button icons
 import useLocation from "../hooks/useLocation";
 import styles from "../styles/OutdoorMapStyles"
+import { buildings, Campus } from "../utils/mapUtils";
 
 const LoyolaOutdoorMap = () => {
   const { location, errorMsg, hasPermission } = useLocation();
@@ -87,6 +88,19 @@ const LoyolaOutdoorMap = () => {
             pinColor="blue"
           />
         )}
+
+        {/* Render polygons for LOY buildings */}
+        {buildings
+          .filter((building) => building.campus === Campus.LOY) 
+          .map((building) => (
+            <Polygon
+              key={building.name}
+              coordinates={building.coordinates}
+              fillColor="rgba(255, 0, 0, 0.4)" 
+              strokeColor="red"
+              strokeWidth={2}
+            />
+        ))}
       </MapView>
 
       {/* Floating Buttons */}
