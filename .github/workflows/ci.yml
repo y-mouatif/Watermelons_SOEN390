@@ -9,6 +9,7 @@ on:
       - main
 
 jobs:
+
   build-and-test:
     name: Build and Test
     runs-on: ${{ matrix.os }}
@@ -79,3 +80,33 @@ jobs:
       - name: Run Jest tests for iOS
         run: npm run test:ios
         working-directory: myApp
+        
+  
+  #Codecov      
+  test:
+          runs-on: ubuntu-latest
+          name: Codecov report
+          steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+      
+            - name: Setup Node.js and deps
+              uses: actions/setup-node@v3
+
+            - name: Install dependencies
+              run: npm install 
+              working-directory: myApp
+              
+             # Check Jest installation (this will ensure Jest is installed and accessible)
+            - name: Check Jest installation
+              run: npm run jest --version
+              working-directory: myApp
+      
+            - name: Run tests with coverage
+              run: npm run test:ci:coverage
+              working-directory: myApp
+      
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v4
+              env:
+                CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
