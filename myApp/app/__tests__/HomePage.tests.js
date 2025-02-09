@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
-import HomePage from '../components/HomePage';
+import HomePage from '../screens/HomePage';
 
 // Create a mock for the push function
 const mockPush = jest.fn();
@@ -42,13 +42,13 @@ describe('Home page', () => {
         const page = render(<HomePage />);
         const sgwButton = page.getByTestId('sgwButton');
         fireEvent.press(sgwButton);
-        expect(mockPush).toHaveBeenCalledWith('/SGWCampus');
+        expect(mockPush).toHaveBeenCalledWith('/(tabs)/outdoor-map?type=sgw');
     });
 
     it('should go to loyola campus when loyola campus button is pressed', () => {
         const page = render(<HomePage/>);
         const loyolaButton = page.getByTestId('loyolaButton');
         fireEvent.press(loyolaButton);
-        expect(mockPush).toHaveBeenCalledWith('/LoyolaCampus');
+        expect(mockPush).toHaveBeenCalledWith('/(tabs)/outdoor-map?type=loyola');
     })
 });
