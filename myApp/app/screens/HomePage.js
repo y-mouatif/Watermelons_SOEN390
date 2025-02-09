@@ -5,7 +5,7 @@ import { homepageStyles as styles } from '../styles/HomePageStyles.js'
 export default function HomePage() {
     const router = useRouter()
     return (
-        <View>
+        <View style ={{flex:1}}>
             <Image style={styles.logo}
                 source={require('../../assets/images/logo.png')}
                 resizeMode="contain"
@@ -17,16 +17,14 @@ export default function HomePage() {
                     <TouchableOpacity 
                     style={styles.button}
                     testID="sgwButton"
-                    onPress={() => {
-                        router.push('/SGWCampus');
-                        }}
+                    onPress={() => router.push('/(tabs)/outdoor-map?type=sgw')}
                     >
-                        <Text style={styles.buttonText}>SGW Campus</Text>
+                    <Text style={styles.buttonText}>SGW Campus</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                     style={styles.button}
                     testID="loyolaButton"
-                    onPress={() => router.push('/LoyolaCampus')}
+                    onPress={() => router.push('/(tabs)/outdoor-map?type=loyola')}
                     >
                         <Text style={styles.buttonText}>Loyola Campus</Text>
                     </TouchableOpacity>
@@ -38,16 +36,18 @@ export default function HomePage() {
                     >
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
-                    style={styles.button}
-                    testID="interestButton">
+                    <TouchableOpacity style={styles.button}
+                    onPress={() => router.push('(tabs)/interest-points')}
+                    testID="interestButton"
+                    >
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                     style={styles.buttonOrange}
-                    testID="directionButton">
+                    testID="directionButton"
+                    >
                         <Text style={styles.buttonText}>Directions to my next class</Text>
                     </TouchableOpacity>
                 </View>
@@ -57,11 +57,12 @@ export default function HomePage() {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                     style={styles.googleButton}
-                    testID="googleButton">
+                    testID="googleButton"
+                    >
                         <Image
                             source={require('../../assets/images/google_logo.png')}
-                            testID="googleIcon"
                             style={styles.icon}
+                            testID="googleIcon"
                         />
                         <Text style={styles.googleButtonText}>Connect Google Calendar</Text>
                     </TouchableOpacity>
