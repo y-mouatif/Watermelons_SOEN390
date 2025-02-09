@@ -1,9 +1,11 @@
 import { Tabs, useRouter } from 'expo-router';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 export default function TabLayout() {
   const router = useRouter();
+
 
   return (
     <Tabs
@@ -49,7 +51,7 @@ export default function TabLayout() {
          name={iconName}
          size={24}
          color={focused ? "white" : "grey"}
-         style={{ marginTop: focused ? 5 : -7, marginLeft: focused ? 37 : 0}}
+         style={{ marginTop: focused ? 8 : -8, marginLeft: focused ? 37 : 0}}
        />
      </View>
    );
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
   tabBarStyle: {
     height: 80,
     backgroundColor: "#ffffff",
-    borderRadius: 40,
+    borderRadius: 8,
     borderTopWidth: 0,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 5 },
@@ -77,9 +79,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 5,
     position: "absolute",
-    bottom: 10,
+    bottom: 20,
     left: 10,
     right: 10,
+
   },
 
   tabBarItemStyle: {
@@ -100,7 +103,7 @@ const styles = StyleSheet.create({
 
   activeTabBackground: {
     backgroundColor: "grey",
-    borderRadius: 40,
+    borderRadius: 8,
     width: 100,
     height: 60,
     position: "absolute",
