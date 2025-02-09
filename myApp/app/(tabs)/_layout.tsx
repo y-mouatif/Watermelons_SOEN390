@@ -1,7 +1,7 @@
 import { Tabs, useRouter } from 'expo-router';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import styles from "../styles/LayoutStyles.js"
+import {layoutStyles as styles} from "../styles/LayoutStyles.js"
 
 interface HeaderLeftButtonProps {
   onPress: () => void;
