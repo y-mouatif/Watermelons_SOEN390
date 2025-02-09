@@ -1,8 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import InterestPoints from '../screens/InterestPointsPage';
+import InterestPoints from '../(tabs)/interest-points';
 import Favorites from '../screens/FavoritesPage';
 import IndoorMap from '../screens/IndoorMapPage';
-import Index from './../index';
+import Index from '../index';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Text, StyleSheet, View } from 'react-native';
 

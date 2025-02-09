@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, Text, TouchableOpacity } from "react-native";
 import { useRouter } from 'expo-router';
 import { homepageStyles as styles } from '../styles/HomePageStyles.js'
-import InterestPoints from '../screens/InterestPointsPage';
+import InterestPoints from '../(tabs)/interest-points.jsx';
 export default function HomePage() {
     const router = useRouter()
     return (
@@ -16,13 +16,13 @@ export default function HomePage() {
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => router.push('/SGWCampus')}
+                    onPress={() => router.push('/(tabs)/outdoor-map?type=sgw')}
                     >
                     <Text style={styles.buttonText}>SGW Campus</Text>
                     </TouchableOpacity>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => router.push('LoyolaCampus')}
+                    onPress={() => router.push('/(tabs)/outdoor-map?type=loyola')}
                     >
                         <Text style={styles.buttonText}>Loyola Campus</Text>
                     </TouchableOpacity>
@@ -32,7 +32,7 @@ export default function HomePage() {
                         <Text style={styles.buttonText}>Browse</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}
-                    onPress={() => router.push('../screens/InterestPointsPage')}
+                    onPress={() => router.push('(tabs)/interest-points')}
                     >
                         <Text style={styles.buttonText}>Interest Points</Text>
                     </TouchableOpacity>
