@@ -2,11 +2,14 @@ import React, { useRef, useState, useEffect } from "react";
 import { View, TouchableOpacity, Text, Modal } from "react-native";
 import MapView, { Marker, Polygon } from "react-native-maps";
 import { MaterialIcons } from "@expo/vector-icons";
+import { isPointInPolygon } from "geolib"; 
 import useLocation from "../hooks/useLocation";
 import styles from "../styles/OutdoorMapStyles";
 import { fetchBuildingById } from "../api/buildingService";
 import BuildingPopup from "../components/BuildingPopup";
 import { buildings, Building } from "../api/buildingData";
+import { Campus } from "../utils/mapUtils"; 
+
 
 const LoyolaOutdoorMap = () => {
   const { location, hasPermission } = useLocation();
@@ -15,6 +18,7 @@ const LoyolaOutdoorMap = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showLocating, setShowLocating] = useState(true);
   const [showPermissionPopup, setShowPermissionPopup] = useState(!hasPermission);
+  const [highlightedBuilding, setHighlightedBuilding] = useState<string | null>(null);
 
   const loyolaRegion = {
     latitude: 45.4581281,
@@ -26,6 +30,15 @@ const LoyolaOutdoorMap = () => {
   useEffect(() => {
     if (location) {
       setShowLocating(false);
+
+      // Check if user is inside a building
+      for (const building of buildings.filter((b) => b.campus === Campus.SGW)) {
+        if (building.coordinates && isPointInPolygon(location, building.coordinates)) {
+          setHighlightedBuilding(building.name);
+          return;
+        }
+      }
+      setHighlightedBuilding(null);
     }
     if (!hasPermission) {
       setShowPermissionPopup(true);
@@ -91,17 +104,17 @@ const LoyolaOutdoorMap = () => {
         )}
 
         {buildings
-          .filter((building) => building.campus === "LOY")
+          .filter((building) => building.campus === Campus.LOY)
           .map((building) =>
             building.coordinates && building.coordinates.length > 0 ? (
               <Polygon
-                key={building.id}
+                key={building.id} // ✅ Use unique ID as key
                 coordinates={building.coordinates}
-                fillColor="rgba(255, 0, 0, 0.4)"
-                strokeColor="red"
+                fillColor={highlightedBuilding === building.name ? "rgba(0, 0, 255, 0.4)" : "rgba(255, 0, 0, 0.4)"} // ✅ Highlighting
+                strokeColor={highlightedBuilding === building.name ? "blue" : "red"} // ✅ Highlighting
                 strokeWidth={2}
                 tappable={true}
-                onPress={() => handleBuildingPress(building.id)}
+                onPress={() => handleBuildingPress(building.id)} // ✅ Keep popup functionality
               />
             ) : null
           )}
