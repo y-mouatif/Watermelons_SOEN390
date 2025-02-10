@@ -532,5 +532,12 @@ export const buildings: Building[] = [
   export const getBuildingById = (id: string): Building | undefined => {
     return buildings.find((building) => building.id === id);
   };
+  
+  //Add Default Export to Fix Import Errors
+  export default {
+    buildings,
+    getAllBuildings,
+    getBuildingById,
+  };
 
   
