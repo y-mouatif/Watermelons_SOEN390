@@ -2,16 +2,15 @@ import { Tabs, useRouter } from 'expo-router';
 import { StyleSheet, View, TouchableOpacity, Text} from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-
 export default function TabLayout() {
   const router = useRouter();
-
 
   return (
     <Tabs
       screenOptions={({ route }) => ({
         tabBarStyle: styles.tabBarStyle,
         tabBarItemStyle: styles.tabBarItemStyle,
+
         tabBarActiveTintColor: 'white',
         tabBarInactiveTintColor: 'grey',
         headerLeft: () => (
@@ -63,10 +62,10 @@ export default function TabLayout() {
       <Tabs.Screen name="outdoor-map" />
       <Tabs.Screen name="favorites" />
       <Tabs.Screen name="index" />
+
     </Tabs>
   );
 }
-
 const styles = StyleSheet.create({
   tabBarStyle: {
     height: 80,

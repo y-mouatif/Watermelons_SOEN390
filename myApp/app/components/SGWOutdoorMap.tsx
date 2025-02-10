@@ -8,7 +8,8 @@ import {
   Modal 
 } from "react-native";
 import MapView, { Marker, Polygon } from "react-native-maps";
-import { MaterialIcons } from "@expo/vector-icons"; 
+import { MaterialIcons } from "@expo/vector-icons";
+import { isPointInPolygon } from "geolib"; 
 import useLocation from "../hooks/useLocation";
 import styles from "../styles/OutdoorMapStyles";
 import { buildings, Campus } from "../utils/mapUtils";
@@ -18,6 +19,7 @@ const SGWOutdoorMap = () => {
   const mapRef = useRef<MapView | null>(null);
   const [showLocating, setShowLocating] = useState(true);
   const [showPermissionPopup, setShowPermissionPopup] = useState(!hasPermission);
+  const [highlightedBuilding, setHighlightedBuilding] = useState<string | null>(null);
 
   // Default region for SGW Campus
   const campusRegion = {
@@ -31,6 +33,15 @@ const SGWOutdoorMap = () => {
   useEffect(() => {
     if (location) {
       setShowLocating(false);
+
+      // Check if user is inside a building
+      for (const building of buildings.filter((b) => b.campus === Campus.SGW)) {
+        if (isPointInPolygon(location, building.coordinates)) {
+          setHighlightedBuilding(building.name);
+          return;
+        }
+      }
+      setHighlightedBuilding(null);
     }
     if (!hasPermission) {
       setShowPermissionPopup(true);
@@ -91,13 +102,13 @@ const SGWOutdoorMap = () => {
 
         {/* Render polygons for SGW buildings */}
         {buildings
-          .filter((building) => building.campus === Campus.SGW) 
+          .filter((building) => building.campus === Campus.SGW)
           .map((building) => (
             <Polygon
               key={building.name}
               coordinates={building.coordinates}
-              fillColor="rgba(255, 0, 0, 0.4)" 
-              strokeColor="red"
+              fillColor={highlightedBuilding === building.name ? "rgba(0, 0, 255, 0.4)" : "rgba(255, 0, 0, 0.4)"}
+              strokeColor={highlightedBuilding === building.name ? "blue" : "red"}
               strokeWidth={2}
             />
           ))}
