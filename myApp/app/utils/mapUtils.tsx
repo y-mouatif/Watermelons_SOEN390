@@ -6,6 +6,7 @@ export enum Campus {
 
 // Interface for building data
 interface Building {
+  id: string; 
   campus: Campus;
   name: string;
   coordinates: { latitude: number; longitude: number }[];
@@ -14,6 +15,7 @@ interface Building {
 // Building coordinates
 export const buildings: Building[] = [
   {
+    id: "sgw1",
     campus: Campus.SGW,
     name: "Hall Building",
     coordinates: [
@@ -24,6 +26,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "jmsb",
     campus: Campus.SGW,
     name: "John Molson School of Business",
     coordinates: [
@@ -34,6 +37,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "ev1",
     campus: Campus.SGW,
     name: "Pavillon EV Building",
     coordinates: [
@@ -46,6 +50,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "fb1",
     campus: Campus.SGW,
     name: "Faubourg Ste-Catherine Building",
     coordinates: [
@@ -56,6 +61,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "cs1",
     campus: Campus.SGW,
     name: "Learning Square Building",
     coordinates: [
@@ -68,6 +74,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "lb1",
     campus: Campus.SGW,
     name: "LB Building",
     coordinates: [
@@ -78,6 +85,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "gnb1",
     campus: Campus.SGW,
     name: "Grey Nuns Building",
     coordinates: [
@@ -90,6 +98,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "er1",
     campus: Campus.SGW,
     name: "ER Building",
     coordinates: [
@@ -100,6 +109,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "sgw2",
     campus: Campus.SGW,
     name: "L Building",
     coordinates: [
@@ -110,6 +120,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "cajb1",
     campus: Campus.LOY,
     name: "Communications and Journalism Building",
     coordinates: [
@@ -130,6 +141,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy1",
     campus: Campus.LOY,
     name: "Central Building",
     coordinates: [
@@ -140,6 +152,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy2",
     campus: Campus.LOY,
     name: "Hingston Hall C Building",
     coordinates: [
@@ -150,6 +163,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy3",
     campus: Campus.LOY,
     name: "Hingston Hall B Building",
     coordinates: [
@@ -160,6 +174,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy4",
     campus: Campus.LOY,
     name: "Hingston Hall A Building",
     coordinates: [
@@ -170,6 +185,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy5",
     campus: Campus.LOY,
     name: "Concordia Applied Psychology Centre Building",
     coordinates: [
@@ -180,6 +196,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy6",
     campus: Campus.LOY,
     name: "Richard J. Renaud Science Complex Building",
     coordinates: [
@@ -201,6 +218,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy7",
     campus: Campus.LOY,
     name: "Perform Centre Building",
     coordinates: [
@@ -211,6 +229,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy8",
     campus: Campus.LOY,
     name: "Centre for Structural and Functional Genomics Building",
     coordinates: [
@@ -221,6 +240,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy9",
     campus: Campus.LOY,
     name: "Vanier Library",
     coordinates: [
@@ -245,6 +265,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy10",
     campus: Campus.LOY,
     name: "Concordia Stadium",
     coordinates: [
@@ -259,6 +280,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy11",
     campus: Campus.LOY,
     name: "Loyola Jesuit Hall and Conference Centre Building",
     coordinates: [
@@ -269,6 +291,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy12",
     campus: Campus.LOY,
     name: "Loyola Administration Building",
     coordinates: [
@@ -279,6 +302,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy13",
     campus: Campus.LOY,
     name: "Loyola Hall Building",
     coordinates: [
@@ -289,6 +313,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy14", 
     campus: Campus.LOY,
     name: "Jesuit Residence Building",
     coordinates: [
@@ -299,6 +324,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy15",
     campus: Campus.LOY,
     name: "Terrebonne Building",
     coordinates: [
@@ -309,6 +335,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy16",
     campus: Campus.LOY,
     name: "BH,BB Annex Building",
     coordinates: [
@@ -319,6 +346,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy17",
     campus: Campus.LOY,
     name: "Applied Science Hub Building",
     coordinates: [
@@ -329,6 +357,7 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy18",
     campus: Campus.LOY,
     name: "St. Ignatius of Loyola Church",
     coordinates: [
@@ -343,3 +372,18 @@ export const buildings: Building[] = [
     ],
   },
 ];
+
+//Function to retrieve all buildings
+export const getAllBuildings = (): Building[] => buildings;
+
+//Function to get a building by ID
+export const getBuildingById = (id: string): Building | undefined => {
+  return buildings.find((building: Building) => building.id === id);
+};
+
+//Fix Import Issue: Add Default Export
+export default {
+  buildings,
+  getAllBuildings,
+  getBuildingById,
+};
