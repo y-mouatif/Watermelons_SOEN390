@@ -1,7 +1,19 @@
 import React from "react";
-const buildings = [
 
-    {
+export interface Building {
+  id: string;
+  name: string;
+  longName: string;
+  openHours: string;
+  wheelchairAccessible: boolean;
+  departments: string[];
+  services?: string[];
+  coordinates?: { latitude: number; longitude: number }[];
+  campus?: string;
+}
+
+export const buildings: Building[] = [
+  {
         id: "loy1",
         name: "AD",
         longName: "Administration Building",
@@ -452,6 +464,7 @@ const buildings = [
         name: "S",
         longName: "S Annex",
         openHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+        wheelchairAccessible: false,
         departments: ["Department of Philosophy"]
       },
       {
@@ -514,9 +527,9 @@ const buildings = [
     
   ];
   
-  export const getAllBuildings = () => buildings;
-  
-  export const getBuildingById = (id: string) => {
+  export const getAllBuildings = (): Building[] => buildings;
+
+  export const getBuildingById = (id: string): Building | undefined => {
     return buildings.find((building) => building.id === id);
   };
 
