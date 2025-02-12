@@ -17,8 +17,9 @@ export default function TabLayout() {
           <TouchableOpacity
             onPress={() => router.push('/')}
             style={styles.headerButton}
+            testID="homeButton"
           >
-            <Ionicons name="home" size={24} color="black" />
+            <Ionicons name="home" size={24} color="black" options = {{testID: "homeIcon"}}/>
             <Text style={styles.headerButtonText}>Home</Text>
           </TouchableOpacity>
         ),
@@ -28,15 +29,19 @@ export default function TabLayout() {
           switch (route.name) {
             case "interest-points":
               iconName = focused ? "pin" : "pin-outline";
+              testID = "interestPointsIcon";
               break;
             case "indoor-map":
               iconName = focused ? "map" : "map-outline";
+              testID = "indoorMapIcon";
               break;
             case "outdoor-map":
               iconName = focused ? "map" : "map-outline";
+              testID = "outdoorMapIcon";
               break;
             case "favorites":
               iconName = focused ? "star" : "star-outline";
+              testID = "favoritesIcon"
               break;
             case "index":
               iconName = focused ? "home" : "home-outline";
@@ -57,11 +62,11 @@ export default function TabLayout() {
         },
       })}
     >
-      <Tabs.Screen name="interest-points" options={{ headerShown: true }} />
-      <Tabs.Screen name="indoor-map" />
-      <Tabs.Screen name="outdoor-map" />
-      <Tabs.Screen name="favorites" />
-      <Tabs.Screen name="index" />
+      <Tabs.Screen name="interest-points" options={{ headerShown: true, testID: "interestPointsButton" }} />
+      <Tabs.Screen name="indoor-map" options = {{testID: "indoorMapButton"}}/>
+      <Tabs.Screen name="outdoor-map" options = {{testID: "outdoorMapButton"}}/>
+      <Tabs.Screen name="favorites" options = {{testID: "favoritesButton"}}/>
+
 
     </Tabs>
   );
