@@ -49,11 +49,13 @@ describe('TabLayout', () => {
         expect(interestPointsIcon).toBeTruthy();
         expect(favoritesIcon).toBeTruthy();
         expect(indoorMapIcon).toBeTruthy();
+        expect(outdoorMapIcon).toBeTruthy();
         expect(homeButton).toBeTruthy();
         expect(interestPointsButton).toBeTruthy();
         expect(favoritesButton).toBeTruthy();
         expect(indoorMapButton).toBeTruthy();
-
+        expect(outdoorMapButton).toBeTruthy();
+        
     })
 
 
@@ -73,7 +75,7 @@ describe('TabLayout', () => {
         expect(mockPush).toHaveBeenCalledWith("./(tabs)/interest-points");
     });
 
-    {/* Modify the path if needed when indoor map and indoor navigations are implemented */}
+    /* Modify the path if needed when indoor map and indoor navigations are implemented */
     it('should go to indoor map page when indoor map button is pressed', () => {
         const page = render(<TabLayout />);
         const indoorMapButton = page.getByTestId("indoorMapButton");
