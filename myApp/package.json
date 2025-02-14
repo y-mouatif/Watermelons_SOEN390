@@ -43,11 +43,8 @@
     "expo-symbols": "~0.2.1",
     "expo-system-ui": "~4.0.7",
     "expo-web-browser": "~14.0.2",
-
-    "geolib": "^3.3.4",
-
     "formdata-node": "^6.0.3",
-
+    "geolib": "^3.3.4",
     "install": "^0.13.0",
     "leaflet": "^1.9.4",
     "myapp": "file:",
