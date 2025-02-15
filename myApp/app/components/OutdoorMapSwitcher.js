@@ -40,7 +40,7 @@ const OutdoorMapSwitcher = () => {
       <View style={styles.switchButtonContainer}>
         <TouchableOpacity
           style={styles.switchButton}
-          onPress={() => setIsSGW((prev) => !prev)}
+          onPress={handleSwitchCampus}
         >
           <Text style={styles.switchButtonText}>Switch Campus</Text>
         </TouchableOpacity>
