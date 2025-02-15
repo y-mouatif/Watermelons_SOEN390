@@ -61,23 +61,24 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // Custom marker style for both coffee shops and restaurants
-restaurantMarker: {
+  // Custom marker style for restaurants
+  restaurantMarker: {
     backgroundColor: "orange", 
     padding: 6,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#fff",
     elevation: 4,
-},
-coffeeMarker: {
+  },
+  // Custom marker style for coffee shops
+  coffeeMarker: {
     backgroundColor: "black", 
     padding: 6,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "#fff",
     elevation: 4,
-},
+  },
   // Update Results button container (placed at top center under the notch)
   updateButtonContainer: {
     position: "absolute",
@@ -141,5 +142,42 @@ coffeeMarker: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  // Toggle button (for switching between map and list views)
+  listButton: {
+    backgroundColor: "#1E88E5",
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    elevation: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 16,
+  },
+  // List view container (full screen within the tab)
+  listViewContainer: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 40,
+  },
+  listContent: {
+    padding: 20,
+  },
+  listItem: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
+  },
+  listItemText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  listItemDistance: {
+    fontSize: 14,
+    color: "#666",
   },
 });

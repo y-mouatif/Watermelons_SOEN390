@@ -1,11 +1,18 @@
-import React, { useRef, useState, useEffect } from "react";
-import { View, TouchableOpacity, Text, Modal, ActivityIndicator } from "react-native";
+import React, { useRef, useState, useEffect, useMemo, useCallback } from "react";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  ActivityIndicator,
+  ScrollView,
+  Modal,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import useLocation from "../hooks/useLocation";
 import styles from "../styles/InterestPointsStyles";
 
-//hard-coded API key
+// Hard-coded API key
 const GOOGLE_PLACES_API_KEY = "AIzaSyA-1hK-5QvW-HgnW1uN-nUJf9z1fCwulsQ";
 
 // --- Custom Marker Components ---
@@ -40,20 +47,62 @@ const InterestPoints = () => {
   const [coffeeShops, setCoffeeShops] = useState([]);
   const [restaurants, setRestaurants] = useState([]);
   const [showUpdateButton, setShowUpdateButton] = useState(false);
+  // Toggle between map view and list view
+  const [isListView, setIsListView] = useState(false);
 
-  // When user location becomes available, center the map and fetch places.
+  // Helper function to calculate distance using the Haversine formula.
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const toRad = (value) => (value * Math.PI) / 180;
+    const R = 6371000; // Earth's radius in meters.
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+    const a =
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) ** 2;
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  };
+
+  const formatDistance = (distance) => {
+    if (distance > 1000) {
+      return (distance / 1000).toFixed(2) + " km";
+    }
+    return Math.round(distance) + " m";
+  };
+
+  // Helper function to render an icon based on the point's type.
+  const renderIconForPoint = (point) => {
+    const types = point.types || [];
+    if (types.includes("restaurant")) {
+      return (
+        <MaterialCommunityIcons
+          name="silverware-fork-knife"
+          size={24}
+          color="orange"
+        />
+      );
+    } else if (types.includes("cafe") || point.name.toLowerCase().includes("coffee")) {
+      return (
+        <MaterialCommunityIcons name="coffee" size={24} color="black" />
+      );
+    }
+    return null;
+  };
+
+  // When user location becomes available, update region and fetch places immediately.
   useEffect(() => {
     if (location) {
       console.debug("User location obtained:", location);
       setShowLocating(false);
-      setRegion((prev) => ({
-        ...prev,
+      const newRegion = {
+        ...region,
         latitude: location.latitude,
         longitude: location.longitude,
-      }));
-      // Also update the lastFetchedRegion if this is the first load.
-      if (!lastFetchedRegion) setLastFetchedRegion(region);
-      fetchPlacesForRegion();
+      };
+      setRegion(newRegion);
+      fetchPlacesForRegion(newRegion);
     } else {
       console.debug("User location not yet available or permission denied.");
     }
@@ -61,15 +110,13 @@ const InterestPoints = () => {
       console.warn("Location permission denied.");
       setShowPermissionPopup(true);
     }
-    
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, hasPermission]);
 
   // Monitor region changes to conditionally show the update button.
   useEffect(() => {
-    // Calculate the difference from the last fetched region.
     const latDiff = Math.abs(region.latitude - lastFetchedRegion.latitude);
     const lngDiff = Math.abs(region.longitude - lastFetchedRegion.longitude);
-    // If moved more than the threshold, show the update button.
     if (latDiff > 0.005 || lngDiff > 0.005) {
       setShowUpdateButton(true);
     } else {
@@ -78,15 +125,16 @@ const InterestPoints = () => {
   }, [region, lastFetchedRegion]);
 
   /**
-   * Fetch places (coffee shops & restaurants) for the current region.
+   * Fetch places (coffee shops & restaurants) for the specified region.
+   * Accepts an optional parameter so that we can pass the updated region when needed.
    */
-  const fetchPlacesForRegion = async () => {
+  const fetchPlacesForRegion = async (currentRegion = region) => {
     setLoading(true);
     try {
-      const { latitude, longitude } = region;
+      const { latitude, longitude } = currentRegion;
       const radius = 2000; // meters
       const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=${radius}&keyword=coffee|restaurant&key=${GOOGLE_PLACES_API_KEY}`;
-      console.debug("Fetching places for region:", region, "URL:", url);
+      console.debug("Fetching places for region:", currentRegion, "URL:", url);
       const response = await fetch(url);
       const data = await response.json();
 
@@ -98,44 +146,47 @@ const InterestPoints = () => {
           const types = place.types || [];
           if (types.includes("restaurant")) {
             resto.push(place);
-          } else if (types.includes("cafe") || place.name.toLowerCase().includes("coffee")) {
+          } else if (
+            types.includes("cafe") ||
+            place.name.toLowerCase().includes("coffee")
+          ) {
             coffee.push(place);
           }
         });
 
         setCoffeeShops(coffee);
         setRestaurants(resto);
-        console.debug(`Found ${coffee.length} coffee shops, ${resto.length} restaurants.`);
+        console.debug(
+          `Found ${coffee.length} coffee shops, ${resto.length} restaurants.`
+        );
       }
     } catch (error) {
       console.error("Error fetching places:", error);
     }
-
+    // Add a slight delay for consistency.
     await new Promise((resolve) => setTimeout(resolve, 1000));
     setLoading(false);
-    // Once fetched, update the last fetched region and hide the update button.
-    setLastFetchedRegion(region);
+    setLastFetchedRegion(currentRegion);
     setShowUpdateButton(false);
   };
 
   /**
    * Centers the map on the user's current location.
    */
-  const centerMapOnUser = () => {
+  const centerMapOnUser = useCallback(() => {
     if (location && mapRef.current) {
       console.debug("Centering map on user location:", location);
-      mapRef.current.animateToRegion(
-        {
-          ...region,
-          latitude: location.latitude,
-          longitude: location.longitude,
-        },
-        1000
-      );
+      const updatedRegion = {
+        ...region,
+        latitude: location.latitude,
+        longitude: location.longitude,
+      };
+      mapRef.current.animateToRegion(updatedRegion, 1000);
+      setRegion(updatedRegion);
     } else {
       console.warn("Cannot center map - user location not available.");
     }
-  };
+  }, [location, region]);
 
   /**
    * Zoom in/out functions.
@@ -158,86 +209,166 @@ const InterestPoints = () => {
     }));
   };
 
+  // Memoize sorted points to avoid recalculating on every render.
+  const sortedPoints = useMemo(() => {
+    const allPoints = [...coffeeShops, ...restaurants];
+    if (location) {
+      return allPoints.sort((a, b) => {
+        const aLat = a.geometry?.location?.lat;
+        const aLng = a.geometry?.location?.lng;
+        const bLat = b.geometry?.location?.lat;
+        const bLng = b.geometry?.location?.lng;
+        const aDistance =
+          aLat && aLng
+            ? calculateDistance(location.latitude, location.longitude, aLat, aLng)
+            : Infinity;
+        const bDistance =
+          bLat && bLng
+            ? calculateDistance(location.latitude, location.longitude, bLat, bLng)
+            : Infinity;
+        return aDistance - bDistance;
+      });
+    }
+    return allPoints;
+  }, [coffeeShops, restaurants, location]);
+
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapRef}
-        style={styles.map}
-        region={region}
-        onRegionChangeComplete={(newRegion) => {
-          setRegion(newRegion);
-          console.debug("Map region changed:", newRegion);
-        }}
-        showsUserLocation={true}
-        showsPointsOfInterest={false}
-        showsBuildings={false}
-      >
-        {/* Coffee shop markers */}
-        {coffeeShops.map((shop) => {
-          const lat = shop.geometry?.location?.lat;
-          const lng = shop.geometry?.location?.lng;
-          if (!lat || !lng) return null;
-          return (
-            <Marker
-              key={shop.place_id}
-              coordinate={{ latitude: lat, longitude: lng }}
-              title={shop.name}
-            >
-              <CoffeeMarker />
-            </Marker>
-          );
-        })}
+      {isListView ? (
+        // List View: Display the points sorted by distance.
+        <ScrollView
+          style={styles.listViewContainer}
+          contentContainerStyle={styles.listContent}
+        >
+          {sortedPoints.map((point) => {
+            const lat = point.geometry?.location?.lat;
+            const lng = point.geometry?.location?.lng;
+            const distance =
+              lat && lng && location
+                ? calculateDistance(
+                    location.latitude,
+                    location.longitude,
+                    lat,
+                    lng
+                  )
+                : null;
+            return (
+              <View style={styles.listItem} key={point.place_id}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  {renderIconForPoint(point)}
+                  <Text style={[styles.listItemText, { marginLeft: 10 }]}>
+                    {point.name}
+                  </Text>
+                </View>
+                {distance !== null && (
+                  <Text style={styles.listItemDistance}>
+                    {formatDistance(distance)}
+                  </Text>
+                )}
+              </View>
+            );
+          })}
+        </ScrollView>
+      ) : (
+        // Map View: Display the map with markers.
+        <MapView
+          ref={mapRef}
+          style={styles.map}
+          region={region}
+          onRegionChangeComplete={(newRegion) => {
+            setRegion(newRegion);
+            console.debug("Map region changed:", newRegion);
+          }}
+          showsUserLocation={true}
+          showsPointsOfInterest={false}
+          showsBuildings={false}
+        >
+          {/* Coffee shop markers */}
+          {coffeeShops.map((shop) => {
+            const lat = shop.geometry?.location?.lat;
+            const lng = shop.geometry?.location?.lng;
+            if (!lat || !lng) return null;
+            return (
+              <Marker
+                key={shop.place_id}
+                coordinate={{ latitude: lat, longitude: lng }}
+                title={shop.name}
+              >
+                <CoffeeMarker />
+              </Marker>
+            );
+          })}
+          {/* Restaurant markers */}
+          {restaurants.map((restaurant) => {
+            const lat = restaurant.geometry?.location?.lat;
+            const lng = restaurant.geometry?.location?.lng;
+            if (!lat || !lng) return null;
+            return (
+              <Marker
+                key={restaurant.place_id}
+                coordinate={{ latitude: lat, longitude: lng }}
+                title={restaurant.name}
+              >
+                <RestaurantMarker />
+              </Marker>
+            );
+          })}
+        </MapView>
+      )}
 
-        {/* Restaurant markers */}
-        {restaurants.map((restaurant) => {
-          const lat = restaurant.geometry?.location?.lat;
-          const lng = restaurant.geometry?.location?.lng;
-          if (!lat || !lng) return null;
-          return (
-            <Marker
-              key={restaurant.place_id}
-              coordinate={{ latitude: lat, longitude: lng }}
-              title={restaurant.name}
+      {/* Floating Buttons Container */}
+      <View style={styles.floatingButtonsContainer}>
+        {!isListView && (
+          <>
+            <TouchableOpacity
+              style={styles.centerButton}
+              onPress={centerMapOnUser}
             >
-              <RestaurantMarker />
-            </Marker>
-          );
-        })}
-      </MapView>
+              <MaterialIcons name="my-location" size={24} color="white" />
+            </TouchableOpacity>
+            <View style={styles.zoomContainer}>
+              <TouchableOpacity style={styles.zoomButton} onPress={handleZoomIn}>
+                <MaterialIcons name="add" size={24} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.zoomButton} onPress={handleZoomOut}>
+                <MaterialIcons name="remove" size={24} color="white" />
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+        {/* Toggle Button: Shows "list" icon in map view and "map" icon in list view */}
+        <TouchableOpacity
+          style={styles.listButton}
+          onPress={() => setIsListView((prev) => !prev)}
+        >
+          <MaterialIcons
+            name={isListView ? "map" : "list"}
+            size={24}
+            color="white"
+          />
+        </TouchableOpacity>
+      </View>
 
-      {/* Loading indicator */}
+      {/* Update Results Button (only visible in Map view) */}
+      {!isListView && showUpdateButton && (
+        <View style={styles.updateButtonContainer}>
+          <TouchableOpacity
+            style={styles.updateButton}
+            onPress={() => fetchPlacesForRegion(region)}
+          >
+            <Text style={styles.updateButtonText}>Update Results</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      {/* Loading Indicator */}
       {loading && (
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color="#1E88E5" />
         </View>
       )}
 
-      {/* Grouped Floating Buttons (center on user & zoom controls) */}
-      <View style={styles.floatingButtonsContainer}>
-        <TouchableOpacity style={styles.centerButton} onPress={centerMapOnUser}>
-          <MaterialIcons name="my-location" size={24} color="white" />
-        </TouchableOpacity>
-
-        <View style={styles.zoomContainer}>
-          <TouchableOpacity style={styles.zoomButton} onPress={handleZoomIn}>
-            <MaterialIcons name="add" size={24} color="white" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.zoomButton} onPress={handleZoomOut}>
-            <MaterialIcons name="remove" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      {/* Update Results Button (appears when map moves) */}
-      {showUpdateButton && (
-        <View style={styles.updateButtonContainer}>
-          <TouchableOpacity style={styles.updateButton} onPress={fetchPlacesForRegion}>
-            <Text style={styles.updateButtonText}>Update Results</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      {/* Modal for location permission denial */}
+      {/* Modal for Location Permission Denial */}
       <Modal visible={showPermissionPopup} transparent animationType="slide">
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
