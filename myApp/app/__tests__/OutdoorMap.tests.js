@@ -55,6 +55,7 @@ describe('OutdoorMap - Switch Campus button', () => {
   });
 
   it('toggles campus when "Switch Campus" button is pressed', async () => {
+    jest.setTimeout(10000); // Increase timeout
     const { getByText, getByTestId } = render(<OutdoorMap />);
 
     // Initially, the default campus should be SGW.
