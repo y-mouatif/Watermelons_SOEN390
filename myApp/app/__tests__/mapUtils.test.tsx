@@ -1,5 +1,8 @@
-import { isPointInPolygon } from "geolib"; 
-import { buildings, Campus } from "../utils/mapUtils";
+// import { isPointInPolygon } from "geolib"; 
+import isPointInPolygon from "geolib/es/isPointInPolygon";
+import { buildings } from "../utils/mapUtils";
+import { Campus } from "../api/buildingData"; // Import Campus from its original source
+
 
 describe("Building Data Tests", () => {
   test("All SGW buildings should have 'SGW' as their campus", () => {
