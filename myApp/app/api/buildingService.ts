@@ -1,23 +1,21 @@
-import React from "react";
-
 import { getAllBuildings, getBuildingById } from "./buildingData";
 
-// Get all building information
-export const fetchAllBuildings = async () => {
-  return getAllBuildings();
-};
+// Fetch all buildings 
+export const fetchAllBuildings = () => getAllBuildings();
 
-// Get details of a specific building by ID
-export const fetchBuildingById = async (id: string) => {
-  // Check if ID is invalid (null, undefined, empty, or not a string)
+// Fetch a single building by ID
+export const fetchBuildingById = (id: string) => {
   if (!id || typeof id !== "string" || id.trim() === "") {
-    throw new Error("Invalid building ID. Please provide a valid ID.");
+    throw new Error("❌ Invalid building ID. Please provide a valid ID.");
   }
 
-  // Find the building
   const building = getBuildingById(id);
   if (!building) {
-    throw new Error("Building not found.");
+    throw new Error(`❌ Building with ID "${id}" not found.`);
   }
+
   return building;
 };
+
+//Fix: Add default export
+export default { fetchAllBuildings, fetchBuildingById };

@@ -1,75 +1,82 @@
-// Enum for campus locations
-export enum Campus {
-  SGW = "SGW",
-  LOY = "LOY",
-}
 
-// Interface for building data
-interface Building {
-  campus: Campus;
-  name: string;
-  coordinates: { latitude: number; longitude: number }[];
-}
+import { Building } from "../api/buildingData";
+import { Campus } from "../api/buildingData";
 
 // Building coordinates
 export const buildings: Building[] = [
   {
-    campus: Campus.SGW,
+    id: "sgw-hall",
     name: "Hall Building",
+    longName: "Henry F. Hall Building",
+    openHours: "Monday - Sunday: 7:00 AM - 11:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Geography, Planning and Environment", "Political Science"],
+    services: ["Study Rooms", "Cafeteria"],
+    campus: Campus.SGW,
     coordinates: [
-      { latitude: 45.497708764170056, longitude: -73.57903745550924 },
-      { latitude: 45.4971677836167, longitude: -73.57954322525673 },
-      { latitude: 45.49683156812768, longitude: -73.5788507530604 },
-      { latitude: 45.497373147743474, longitude: -73.57834232326353 },
+      { latitude: 45.4977, longitude: -73.5790 },
+      { latitude: 45.4971, longitude: -73.5795 },
+      { latitude: 45.4968, longitude: -73.5788 },
+      { latitude: 45.4973, longitude: -73.5783 },
     ],
   },
   {
-    campus: Campus.SGW,
+    id: "sgw-jmsb",
     name: "John Molson School of Business",
+    longName: "John Molson School of Business Building",
+    openHours: "Monday - Friday: 7:00 AM - 10:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Finance", "Marketing"],
+    services: ["Computer Labs", "Library"],
+    campus: Campus.SGW,
     coordinates: [
-      { latitude: 45.49551994498565, longitude: -73.57920062907395 },
-      { latitude: 45.49535857941148, longitude: -73.5793643521431 },
-      { latitude: 45.49501011165603, longitude: -73.5787600651902 },
-      { latitude: 45.495193735650766, longitude: -73.57853184516286 },
+      { latitude: 45.4955, longitude: -73.5792 },
+      { latitude: 45.4953, longitude: -73.5793 },
+      { latitude: 45.4950, longitude: -73.5787 },
+      { latitude: 45.4951, longitude: -73.5785 },
     ],
   },
   {
-    campus: Campus.SGW,
-    name: "Pavillon EV Building",
+    id: "loy-cj",
+    name: "Communications and Journalism Building",
+    longName: "CJ Building",
+    openHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Journalism", "Communication Studies"],
+    services: ["Study Rooms"],
+    campus: Campus.LOY,
     coordinates: [
-      { latitude: 45.49567383989148, longitude: -73.57807898778127 },
-      { latitude: 45.49586446758388, longitude: -73.57849838295294 },
-      { latitude: 45.49561182833434, longitude: -73.57876050493525 },
-      { latitude: 45.49524664777955, longitude: -73.57790860849278 },
-      { latitude: 45.495832313560506, longitude: -73.57726313311137 },
-      { latitude: 45.49604131438413, longitude: -73.57771529353083 },
+      { latitude: 45.4578, longitude: -73.6404 },
+      { latitude: 45.4576, longitude: -73.6400 },
+      { latitude: 45.4574, longitude: -73.6401 },
+      { latitude: 45.4573, longitude: -73.6403 },
     ],
   },
   {
-    campus: Campus.SGW,
-    name: "Faubourg Ste-Catherine Building",
+    id: "loy-sc",
+    name: "Student Centre",
+    longName: "Loyola Student Centre",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Student Services"],
+    services: ["Food Court", "Bookstore"],
+    campus: Campus.LOY,
     coordinates: [
-      { latitude: 45.494697617359805, longitude: -73.57803821546234 },
-      { latitude: 45.493842086826234, longitude: -73.57907383173514 },
-      { latitude: 45.493637259181746, longitude: -73.57873392697057 },
-      { latitude: 45.49445099181303, longitude: -73.57761880079917 },
+      { latitude: 45.4587, longitude: -73.6411 },
+      { latitude: 45.4583, longitude: -73.6414 },
+      { latitude: 45.4578, longitude: -73.6398 },
+      { latitude: 45.4582, longitude: -73.6394 },
     ],
   },
   {
+    id: "sgw-gm",
+    name: "GM Building",
+    longName: "Guy-Metro Building",
+    openHours: "Monday - Friday: 8:00 AM - 9:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Mathematics", "Computer Science"],
+    services: ["Computer Labs", "Tutorial Center"],
     campus: Campus.SGW,
-    name: "Learning Square Building",
-    coordinates: [
-      { latitude: 45.49653594280453, longitude: -73.57957024371711 },
-      { latitude: 45.49642006398626, longitude: -73.57968408412736 },
-      { latitude: 45.49637079806912, longitude: -73.57958608238289 },
-      { latitude: 45.49627087833015, longitude: -73.57967517487786 },
-      { latitude: 45.496166101191235, longitude: -73.57944749405738 },
-      { latitude: 45.49638328802403, longitude: -73.57923664181928 },
-    ],
-  },
-  {
-    campus: Campus.SGW,
-    name: "LB Building",
     coordinates: [
       { latitude: 45.49730622534821, longitude: -73.57807280428914 },
       { latitude: 45.496690697848365, longitude: -73.57864792247945 },
@@ -78,8 +85,14 @@ export const buildings: Building[] = [
     ],
   },
   {
-    campus: Campus.SGW,
+    id: "sgw-gnb",
     name: "Grey Nuns Building",
+    longName: "Grey Nuns Building",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Religious Studies", "History"],
+    services: ["Library", "Study Rooms"],
+    campus: Campus.SGW,
     coordinates: [
       { latitude: 45.49444588559977, longitude: -73.57704684530952 },
       { latitude: 45.49394352956143, longitude: -73.57761419053239 },
@@ -90,8 +103,14 @@ export const buildings: Building[] = [
     ],
   },
   {
-    campus: Campus.SGW,
+    id: "sgw-er",
     name: "ER Building",
+    longName: "Engineering, Computer Science and Visual Arts Integrated Complex",
+    openHours: "Monday - Friday: 7:00 AM - 10:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Engineering", "Computer Science", "Design"],
+    services: ["Computer Labs", "Study Rooms"],
+    campus: Campus.SGW,
     coordinates: [
       { latitude: 45.4966874910767, longitude: -73.58014312979104 },
       { latitude: 45.49629611013139, longitude: -73.58045288885724 },
@@ -100,8 +119,14 @@ export const buildings: Building[] = [
     ],
   },
   {
-    campus: Campus.SGW,
+    id: "sgw-h",
     name: "L Building",
+    longName: "Henry F. Hall Building",
+    openHours: "Monday - Sunday: 7:00 AM - 11:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Geography, Planning and Environment", "Political Science"],
+    services: ["Study Rooms", "Cafeteria"],
+    campus: Campus.SGW,
     coordinates: [
       { latitude: 45.497090344163816, longitude: -73.57991901007613 },
       { latitude: 45.49687671299113, longitude: -73.58013715708758 },
@@ -110,6 +135,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gm",
+    longName: "Guy-Metro Building",
+    openHours: "Monday - Friday: 8:00 AM - 9:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Mathematics", "Computer Science"],
+    services: ["Computer Labs", "Tutorial Center"],
     campus: Campus.LOY,
     name: "Communications and Journalism Building",
     coordinates: [
@@ -130,6 +161,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gnb",
+    longName: "Grey Nuns Building",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Religious Studies", "History"],
+    services: ["Library", "Study Rooms"],
     campus: Campus.LOY,
     name: "Central Building",
     coordinates: [
@@ -140,6 +177,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-er",
+    longName: "Engineering, Computer Science and Visual Arts Integrated Complex",
+    openHours: "Monday - Friday: 7:00 AM - 10:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Engineering", "Computer Science", "Design"],
+    services: ["Computer Labs", "Study Rooms"],
     campus: Campus.LOY,
     name: "Hingston Hall C Building",
     coordinates: [
@@ -150,6 +193,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-h",
+    longName: "Henry F. Hall Building",
+    openHours: "Monday - Sunday: 7:00 AM - 11:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Geography, Planning and Environment", "Political Science"],
+    services: ["Study Rooms", "Cafeteria"],
     campus: Campus.LOY,
     name: "Hingston Hall B Building",
     coordinates: [
@@ -160,6 +209,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-cj",
+    longName: "CJ Building",
+    openHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Journalism", "Communication Studies"],
+    services: ["Study Rooms"],
     campus: Campus.LOY,
     name: "Hingston Hall A Building",
     coordinates: [
@@ -170,6 +225,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-sc",
+    longName: "Loyola Student Centre",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Student Services"],
+    services: ["Food Court", "Bookstore"],
     campus: Campus.LOY,
     name: "Concordia Applied Psychology Centre Building",
     coordinates: [
@@ -180,6 +241,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gm",
+    longName: "Guy-Metro Building",
+    openHours: "Monday - Friday: 8:00 AM - 9:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Mathematics", "Computer Science"],
+    services: ["Computer Labs", "Tutorial Center"],
     campus: Campus.LOY,
     name: "Richard J. Renaud Science Complex Building",
     coordinates: [
@@ -201,6 +268,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gnb",
+    longName: "Grey Nuns Building",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Religious Studies", "History"],
+    services: ["Library", "Study Rooms"],
     campus: Campus.LOY,
     name: "Perform Centre Building",
     coordinates: [
@@ -211,6 +284,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-er",
+    longName: "Engineering, Computer Science and Visual Arts Integrated Complex",
+    openHours: "Monday - Friday: 7:00 AM - 10:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Engineering", "Computer Science", "Design"],
+    services: ["Computer Labs", "Study Rooms"],
     campus: Campus.LOY,
     name: "Centre for Structural and Functional Genomics Building",
     coordinates: [
@@ -221,6 +300,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-h",
+    longName: "Henry F. Hall Building",
+    openHours: "Monday - Sunday: 7:00 AM - 11:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Geography, Planning and Environment", "Political Science"],
+    services: ["Study Rooms", "Cafeteria"],
     campus: Campus.LOY,
     name: "Vanier Library",
     coordinates: [
@@ -245,6 +330,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-cj",
+    longName: "CJ Building",
+    openHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Journalism", "Communication Studies"],
+    services: ["Study Rooms"],
     campus: Campus.LOY,
     name: "Concordia Stadium",
     coordinates: [
@@ -259,6 +350,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-sc",
+    longName: "Loyola Student Centre",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Student Services"],
+    services: ["Food Court", "Bookstore"],
     campus: Campus.LOY,
     name: "Loyola Jesuit Hall and Conference Centre Building",
     coordinates: [
@@ -269,6 +366,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gm",
+    longName: "Guy-Metro Building",
+    openHours: "Monday - Friday: 8:00 AM - 9:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Mathematics", "Computer Science"],
+    services: ["Computer Labs", "Tutorial Center"],
     campus: Campus.LOY,
     name: "Loyola Administration Building",
     coordinates: [
@@ -279,6 +382,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gnb",
+    longName: "Grey Nuns Building",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Religious Studies", "History"],
+    services: ["Library", "Study Rooms"],
     campus: Campus.LOY,
     name: "Loyola Hall Building",
     coordinates: [
@@ -289,6 +398,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-er",
+    longName: "Engineering, Computer Science and Visual Arts Integrated Complex",
+    openHours: "Monday - Friday: 7:00 AM - 10:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Engineering", "Computer Science", "Design"],
+    services: ["Computer Labs", "Study Rooms"],
     campus: Campus.LOY,
     name: "Jesuit Residence Building",
     coordinates: [
@@ -299,6 +414,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-h",
+    longName: "Henry F. Hall Building",
+    openHours: "Monday - Sunday: 7:00 AM - 11:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Geography, Planning and Environment", "Political Science"],
+    services: ["Study Rooms", "Cafeteria"],
     campus: Campus.LOY,
     name: "Terrebonne Building",
     coordinates: [
@@ -309,6 +430,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-cj",
+    longName: "CJ Building",
+    openHours: "Monday - Friday: 9:00 AM - 5:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Journalism", "Communication Studies"],
+    services: ["Study Rooms"],
     campus: Campus.LOY,
     name: "BH,BB Annex Building",
     coordinates: [
@@ -319,6 +446,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-sc",
+    longName: "Loyola Student Centre",
+    openHours: "Monday - Friday: 8:00 AM - 6:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Student Services"],
+    services: ["Food Court", "Bookstore"],
     campus: Campus.LOY,
     name: "Applied Science Hub Building",
     coordinates: [
@@ -329,6 +462,12 @@ export const buildings: Building[] = [
     ],
   },
   {
+    id: "loy-gm",
+    longName: "Guy-Metro Building",
+    openHours: "Monday - Friday: 8:00 AM - 9:00 PM",
+    wheelchairAccessible: true,
+    departments: ["Mathematics", "Computer Science"],
+    services: ["Computer Labs", "Tutorial Center"],
     campus: Campus.LOY,
     name: "St. Ignatius of Loyola Church",
     coordinates: [
@@ -343,3 +482,5 @@ export const buildings: Building[] = [
     ],
   },
 ];
+
+export default buildings;

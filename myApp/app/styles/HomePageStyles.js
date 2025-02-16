@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+
 export const homepageStyles = StyleSheet.create({
     container: {
         flex: 1,
@@ -111,3 +112,5 @@ export const homepageStyles = StyleSheet.create({
         height: 30, 
     }
 });
+
+export default homepageStyles;
