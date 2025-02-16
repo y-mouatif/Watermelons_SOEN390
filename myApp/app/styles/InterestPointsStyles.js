@@ -162,7 +162,8 @@ export default StyleSheet.create({
   listViewContainer: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 40,
+    paddingTop: 70,
+    marginBottom: 90,
   },
   listContent: {
     padding: 20,
